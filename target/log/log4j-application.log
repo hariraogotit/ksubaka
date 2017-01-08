@@ -1,0 +1,46 @@
+2017-01-08 15:00:16 INFO  ClassPathXmlApplicationContext:581 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7d6f77cc: startup date [Sun Jan 08 15:00:16 GMT 2017]; root of context hierarchy
+2017-01-08 15:00:16 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [applicationContext.xml]
+2017-01-08 15:00:17 INFO  AbstractQueryHandler:91 - Returned handler com.handlers.InputQueryMovieHandlerImpl@4eb7f003 for the given api themoviedbapi
+2017-01-08 15:00:17 INFO  ApiCallServiceImpl:36 - Called api with the given details http://api.themoviedb.org/3/search/movie Parameters {api_key=08ec52a84fdc9c6236295533b241335b, query=Indiana Jones}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:94 - Called helper api with the given details http://www.omdbapi.com/ Parameters t
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Spring Break Adventure}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Attack of the Hawkmen}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones: Making the Trilogy}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Indiana Jones}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones and the Temple of Doom}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Raiders of the Lost Ark}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Daredevils of the Desert}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones 5}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Espionage Escapades}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Love's Sweet Song}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Scandal of 1920}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Journey of Radiance}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: My First Adventure}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Demons of Deception}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones and the Last Crusade}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Crocodile Jones: The Son of Indiana Dundee}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: Passion for Life}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=The Adventures of Young Indiana Jones: The Perils of Cupid}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones and the Kingdom of the Crystal Skull}
+2017-01-08 15:00:18 INFO  ApiCallServiceImpl:36 - Called api with the given details http://www.omdbapi.com/ Parameters {t=Indiana Jones and the Ultimate Quest}
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL
+2017-01-08 15:00:20 INFO  ApiCallServiceImpl:70 - Response status SUCCESSFUL

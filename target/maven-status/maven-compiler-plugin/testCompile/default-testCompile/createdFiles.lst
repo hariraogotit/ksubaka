@@ -1,0 +1,4 @@
+com/validators/LoadInputQueryValidatorImplTest.class
+com/services/ApiCallServiceImplTest.class
+com/handlers/AbstractQueryHandlerTest.class
+com/ksubaka/APITest.class
