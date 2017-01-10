@@ -117,6 +117,8 @@ public class ApiCallServiceImpl implements ApiCallService{
             parseApiResponse(futureResponse);
             imdbMovies.add(extractApiResponse(futureResponse,ImdbMovie.class));
         }
+        executorService.shutdown();
+
         return imdbMovies;
     }
 
