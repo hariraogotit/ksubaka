@@ -1,6 +1,10 @@
 package com.ksubaka;
 
-import com.handlers.AbstractQueryHandler;
+import com.Utilities.Constant;
+import com.handlers.InputQueryHandler;
+import com.handlers.InputQueryHandlerFactory;
+import com.handlers.InputQueryMovieHandlerImpl;
+import com.handlers.InputQueryMusicHandlerImpl;
 import com.validators.LoadInputQueryValidator;
 import com.validators.LoadInputQueryValidatorImpl;
 import org.apache.log4j.Logger;
@@ -26,12 +30,12 @@ public class LoadInputQuery {
            LoadInputQueryValidator loadInputQueryValidator = new LoadInputQueryValidatorImpl();
 
            String apiName = System.getProperty("api");
-           String movieMusic = System.getProperty("movie");
+           String movie = System.getProperty("movie");
+           String music = System.getProperty("music");
 
+           loadInputQueryValidator.validate(apiName, movie, music);
 
-           loadInputQueryValidator.validate(apiName);
-
-           processInput(apiName, movieMusic);
+           processInput(apiName, movie, music);
 
            System.exit(0);
 
@@ -50,27 +54,45 @@ public class LoadInputQuery {
         StringBuilder usageMessage = new StringBuilder();
         usageMessage.append("Usage :-")
                     .append("-Dapi=")
-                    .append(Arrays.stream(API.values()).map(api -> api.getApi()).collect(Collectors.toList()))
-                    .append("-Dmovie=[name Of the Movie, Music]")
+                    .append(Arrays.stream(API.values()).map(api -> api.getName()).collect(Collectors.toList()))
+                    .append("-D")
+                    .append("[")
+                    .append(Constant.MOVIE_TYPE)
+                    .append("||")
+                    .append(Constant.MUSIC_TYPE)
+                    .append("]")
+                    .append("=movie or music name")
+                    .append("\n\n")
+                    .append("**************************EXAMPLES******************************************")
                     .append("\n")
-                    .append("...Example....")
+                    .append("java -jar -Dapi=itunes -Dmusic=\"Live At Wimbley\" ksubaka-1.0-SNAPSHOT.jar")
                     .append("\n")
-                    .append("java -jar -Dapi=themoviedbapi -Dmovie=\"Live At Wimbley\" ksubaka-1.0-SNAPSHOT.jar")
+                    .append("java -jar -Dapi=themoviedbapi -Dmovie=TED ksubaka-1.0-SNAPSHOT.jar")
+                    .append("\n")
+                    .append("***************************************************************************")
                     .append("\n");
         System.out.println(usageMessage);
     }
 
-    private static void processInput(String apiName, String movieMusic) throws Exception {
+    private static void processInput(String apiName, String movie, String music) throws Exception {
+
         ApplicationContext context = new ClassPathXmlApplicationContext(
                 "applicationContext.xml");
 
-        AbstractQueryHandler abstractQueryHandler =
-                (AbstractQueryHandler) context.getBean("inputQueryMovieHandler");
+        InputQueryHandlerFactory inputQueryHandlerFactory =
+                (InputQueryHandlerFactory) context.getBean("inputQueryHandlerFactory");
 
         API api = API.getApi(apiName);
 
-        abstractQueryHandler.getHandler(api.getType(),apiName)
-                            .handle(movieMusic, api);
+        InputQueryHandler inputQueryHandler = inputQueryHandlerFactory.getHandler(api);
+
+           if(movie!=null){
+               inputQueryHandler.handle(movie, api);
+           }
+
+           if(music!=null){
+               inputQueryHandler.handle(music,api);
+           }
     }
 
 }

@@ -19,7 +19,6 @@ public abstract class AbstractQueryHandler implements InputQueryHandler {
 
     private Map<String,Map<String,String>> apiParameters;
 
-    private Map<String,AbstractQueryHandler> handlers;
 
     /**
      *
@@ -44,7 +43,7 @@ public abstract class AbstractQueryHandler implements InputQueryHandler {
 
     public ClientResponse parse(String movieMusic, PlaceHolder placeHolder, API api) throws Exception{
 
-        Map<String,String> apiParametersMap = apiParameters.get(api.getApi());
+        Map<String,String> apiParametersMap = apiParameters.get(api.getName());
 
         if(apiParametersMap!=null){
             replaceThePlaceHolders(apiParametersMap,movieMusic,placeHolder);
@@ -63,12 +62,12 @@ public abstract class AbstractQueryHandler implements InputQueryHandler {
      * replaces them by user input so that a query can be made to the api
      */
     public void replaceThePlaceHolders(Map<String, String> apiParametersMap,  String movieMusic, PlaceHolder placeHolder) {
-        for(Map.Entry<String,String> entry: apiParametersMap.entrySet() ){
-            if(entry.getKey().equals(placeHolder.getValue())){
-                entry.setValue(movieMusic);
-            }
-        }
-
+        apiParametersMap.entrySet()
+                        .forEach(entry -> {
+                            if(entry.getKey().equals(placeHolder.getValue())){
+                                entry.setValue(movieMusic);
+                            }
+                        });
     }
 
     public ApiCallService getApiCallService() {
@@ -79,34 +78,12 @@ public abstract class AbstractQueryHandler implements InputQueryHandler {
         return apiParameters;
     }
 
-    /**
-     *
-     * @param type
-     * @return Based on the type this method returns either ${@link InputQueryMovieHandlerImpl}
-     * or ${@link InputQueryMusicHandler} to handle the input from the user.
-     */
-
-    public AbstractQueryHandler getHandler(String type,String apiName){
-        AbstractQueryHandler queryHandler = getHandlers().get(type);
-        logger.info("Returned handler " + queryHandler + " for " + "the given api " + apiName);
-        return queryHandler;
-    }
-
     public void setApiParameters(Map<String, Map<String, String>> apiParameters) {
         this.apiParameters = apiParameters;
     }
 
     public void setApiCallService(ApiCallService apiCallService) {
         this.apiCallService = apiCallService;
-    }
-
-    public void setHandlers(Map<String, AbstractQueryHandler> handlers) {
-        this.handlers = handlers;
-    }
-
-    public Map<String, AbstractQueryHandler> getHandlers() {
-
-        return handlers;
     }
 
 }

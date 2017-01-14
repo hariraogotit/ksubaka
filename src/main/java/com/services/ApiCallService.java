@@ -3,6 +3,8 @@ package com.services;
 import com.models.ImdbMovie;
 import com.models.TheMovieDbMovie;
 import com.sun.jersey.api.client.ClientResponse;
+
+import javax.ws.rs.core.MultivaluedMap;
 import java.util.List;
 import java.util.Map;
 

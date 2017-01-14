@@ -35,12 +35,12 @@ public class ApiCallServiceImpl implements ApiCallService{
 
        logger.info("Called api with the given details " +url+ " Parameters " + parameter  );
 
-      WebResource webResource = Client.create().resource(url);
+       WebResource webResource = Client.create().resource(url);
 
        for(Map.Entry<String,String> entry : parameter.entrySet()){
            webResource = buildQueryParm(webResource,entry.getKey(),entry.getValue());
        }
-         return      webResource.getRequestBuilder()
+       return      webResource.getRequestBuilder()
                .type(MediaType.APPLICATION_JSON)
                .get(ClientResponse.class);
     }
@@ -112,11 +112,15 @@ public class ApiCallServiceImpl implements ApiCallService{
     private List<ImdbMovie> retrieveResult(ExecutorService executorService, Set<Callable<ClientResponse>> callables) throws Exception {
         List<Future<ClientResponse>> futures = executorService.invokeAll(callables);
         List<ImdbMovie> imdbMovies = new ArrayList<>();
-        for(Future<ClientResponse> future: futures){
-            ClientResponse futureResponse = future.get();
-            parseApiResponse(futureResponse);
-            imdbMovies.add(extractApiResponse(futureResponse,ImdbMovie.class));
-        }
+        futures.stream().forEach(future -> {
+                try{
+                    ClientResponse futureResponse = future.get();
+                    parseApiResponse(futureResponse);
+                    imdbMovies.add(extractApiResponse(futureResponse,ImdbMovie.class));
+                }catch (Exception ex){
+                    throw new RuntimeException(ex);
+                }
+        });
         executorService.shutdown();
 
         return imdbMovies;
@@ -133,16 +137,17 @@ public class ApiCallServiceImpl implements ApiCallService{
 
     private Set<Callable<ClientResponse>> submitApiCall(List<TheMovieDbMovie> theMovieDbMovies,String url, String inputParameter) {
         Set<Callable<ClientResponse>> callables= new HashSet<>();
-        for(TheMovieDbMovie theMovieDbMovie :theMovieDbMovies){
-             callables.add(new Callable<ClientResponse>() {
-                 @Override
-                 public ClientResponse call() throws Exception {
-                     Map<String,String> parameter = new LinkedHashMap<>();
-                     parameter.put(inputParameter,theMovieDbMovie.getTitle());
-                     return callApi(url,parameter);
-                 }
-             });
-        }
+         theMovieDbMovies.stream().forEach(
+                theMovieDbMovie ->  callables.add( () -> {
+                try {
+                    Map<String, String> parameter = new LinkedHashMap<>();
+                    parameter.put(inputParameter, theMovieDbMovie.getTitle());
+                    return callApi(url, parameter);
+                }catch (Exception ex){
+                    throw  new RuntimeException(ex);
+                }
+             })
+        );
         return callables;
     }
 

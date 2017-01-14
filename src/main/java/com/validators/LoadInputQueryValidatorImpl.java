@@ -1,7 +1,9 @@
 package com.validators;
 
+import com.Utilities.Constant;
 import com.ksubaka.API;
 import com.services.APIException;
+import org.springframework.util.StringUtils;
 
 
 /**
@@ -14,11 +16,26 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
      * @param apiName
      * @throws APIException if the api name is not in ${@link API}
      */
-    public void validate(String apiName) throws APIException  {
+    public void validate(String apiName, String movie, String music) throws APIException  {
          if(!validateApiName(apiName)){
              throw new APIException("api Name is not valid");
          }
+
+         if( !StringUtils.isEmpty(movie) && !StringUtils.isEmpty(music) ){
+             StringBuilder stringBuilder = new StringBuilder();
+             stringBuilder.append("Either ")
+                          .append(Constant.MOVIE_TYPE)
+                          .append(" or ")
+                          .append(Constant.MUSIC_TYPE)
+                          .append(" can be queried but not both");
+              throw new APIException(stringBuilder.toString());
+         }
+
+         if(!validateApiType(apiName,movie,music)){
+             throw new APIException("api Type is not valid");
+         }
     }
+
 
     /**
      *
@@ -32,4 +49,19 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
              }
         return false;
     }
+
+
+    public boolean validateApiType(String apiType, String movie, String music){
+        API api = API.getApi(apiType);
+
+        if(movie!=null){
+            return api.getType().equals(Constant.MOVIE_TYPE);
+        }
+
+        if(music!=null){
+            return api.getType().equals(Constant.MUSIC_TYPE);
+        }
+        return false;
+    }
+
 }

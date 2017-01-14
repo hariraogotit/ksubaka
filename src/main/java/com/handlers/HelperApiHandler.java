@@ -1,5 +1,6 @@
 package com.handlers;
 
+import com.Utilities.Constant;
 import com.models.ImdbMovie;
 import com.models.TheMovieDbMovie;
 import com.services.ApiCallService;
@@ -20,12 +21,10 @@ public class HelperApiHandler {
 
     private ApiCallService apiCallService;
 
-    public static final String url = "http://www.omdbapi.com/";
-    public static final String parameter ="t";
 
     public List<ImdbMovie> callHelperApi(List<TheMovieDbMovie> theMovieDbMovies) throws Exception{
 
-       return apiCallService.callHelperApi(theMovieDbMovies,url,parameter);
+       return apiCallService.callHelperApi(theMovieDbMovies, Constant.URL,Constant.PARAMETER);
 
 
     }

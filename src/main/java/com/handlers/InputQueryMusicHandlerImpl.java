@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Hari Rao on 07/01/17.
  */
-public class InputQueryMusicHandler extends AbstractQueryHandler {
+public class InputQueryMusicHandlerImpl extends AbstractQueryHandler {
 
     public void handle( String music, API api) throws Exception{
 

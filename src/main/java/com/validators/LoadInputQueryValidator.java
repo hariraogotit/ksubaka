@@ -10,5 +10,5 @@ import com.services.APIException;
  * Method in this interface  should be implemented by the validators that will validate the api name from the user
  */
 public interface LoadInputQueryValidator {
-    public void validate(String api)throws APIException;
+    void validate(String api, String movie, String music)throws APIException;
 }

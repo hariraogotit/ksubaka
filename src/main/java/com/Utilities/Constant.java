@@ -7,4 +7,7 @@ public class Constant {
 
     public static final String MOVIE_TYPE = "movie";
     public static final String MUSIC_TYPE = "music";
+
+    public static final String URL = "http://www.omdbapi.com/";
+    public static final String PARAMETER ="t";
 }
