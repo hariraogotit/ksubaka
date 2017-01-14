@@ -48,7 +48,7 @@ public class ApiCallServiceImplTest {
     public void testParseApiResponse() throws Exception{
 
         Map<String,String> theMovieDbApiParameters = inputQueryMovieHandler.getApiParameters()
-                                                                           .get(API.THEMOVIEDBAPI.getApi());
+                                                                           .get(API.THEMOVIEDBAPI.getName());
         for(Map.Entry<String,String> entry: theMovieDbApiParameters.entrySet()){
               if("api_key".equals(entry.getKey())){
                   entry.setValue("INSERT_CORRUPTED_KEY");

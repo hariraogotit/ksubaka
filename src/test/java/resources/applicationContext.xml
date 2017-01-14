@@ -9,14 +9,19 @@ http://www.springframework.org/schema/util/spring-util-4.1.xsd">
     <bean id="abstractQueryHandler" abstract="true" class="com.handlers.AbstractQueryHandler">
         <property name="apiParameters" ref="apiParameters"/>
         <property name="apiCallService" ref="apiCallService"/>
-        <property name="handlers" ref="handlers" />
     </bean>
 
-    <bean id="inputQueryMovieHandler" parent="abstractQueryHandler" class="com.handlers.InputQueryMovieHandlerImpl"/>
+    <bean id="inputQueryMovieHandler" parent="abstractQueryHandler" class="com.handlers.InputQueryMovieHandlerImpl">
+        <property name="helperApiHandler" ref="helperApiHandler" />
+    </bean>
 
-    <bean id="inputQueryMusicHandler" parent="abstractQueryHandler" class="com.handlers.InputQueryMusicHandler"/>
+    <bean id="inputQueryMusicHandler" parent="abstractQueryHandler" class="com.handlers.InputQueryMusicHandlerImpl"/>
 
     <bean id="inputQueryHandlerValidator" class="com.validators.LoadInputQueryValidatorImpl"/>
+
+    <bean id="helperApiHandler" class="com.handlers.HelperApiHandler">
+        <property name="apiCallService" ref="apiCallService"/>
+    </bean>
 
     <bean id="apiCallService" class="com.services.ApiCallServiceImpl"/>
 
@@ -36,11 +41,10 @@ http://www.springframework.org/schema/util/spring-util-4.1.xsd">
         <entry key="query"   value="placeHolder"/>
     </util:map>
 
-    <util:map id="handlers" map-class="java.util.HashMap" key-type="java.lang.String" value-type="com.handlers.AbstractQueryHandler">
-        <entry key="1" value-ref="inputQueryMovieHandler"/>
-        <entry key="2" value-ref="inputQueryMusicHandler"/>
-
-    </util:map>
+    <bean id="inputQueryHandlerFactory" class="com.handlers.InputQueryHandlerFactory">
+        <property name="inputQueryMovieHandler" ref="inputQueryMovieHandler"/>
+        <property name="inputQueryMusicHandler" ref="inputQueryMusicHandler"/>
+    </bean>
 
 
 

@@ -30,13 +30,4 @@ public class LoadInputQueryValidatorImplTest {
         assertFalse(loadInputQueryValidator.validateApiName("Randome"));
     }
 
-    @Test
-    public void testValidateForException() throws APIException {
-        LoadInputQueryValidatorImpl loadInputQueryValidator = new LoadInputQueryValidatorImpl();
-        thrown.expect(APIException.class);
-        thrown.expectMessage("api Name is not valid");
-        loadInputQueryValidator.validate("Random");
-
-    }
-
 }
