@@ -40,6 +40,15 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
         return false;
     }
 
+    /**
+     *
+     * @param apiType
+     * @param movie
+     * @param music
+     * @return
+     * Returns false if the api type is not valid for a given api
+     * or if both the api types are given
+     */
 
     public boolean validateApiType(String apiType, String movie, String music){
         API api = API.getApi(apiType);
