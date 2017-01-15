@@ -21,8 +21,6 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration({ "classpath:applicationContext.xml" })
 public class AbstractQueryHandlerTest {
 
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Autowired
     private InputQueryMovieHandlerImpl inputQueryMovieHandler;

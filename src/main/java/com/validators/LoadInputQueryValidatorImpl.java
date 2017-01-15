@@ -21,16 +21,6 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
              throw new APIException("api Name is not valid");
          }
 
-         if( !StringUtils.isEmpty(movie) && !StringUtils.isEmpty(music) ){
-             StringBuilder stringBuilder = new StringBuilder();
-             stringBuilder.append("Either ")
-                          .append(Constant.MOVIE_TYPE)
-                          .append(" or ")
-                          .append(Constant.MUSIC_TYPE)
-                          .append(" can be queried but not both");
-              throw new APIException(stringBuilder.toString());
-         }
-
          if(!validateApiType(apiName,movie,music)){
              throw new APIException("api Type is not valid");
          }
@@ -54,6 +44,10 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
     public boolean validateApiType(String apiType, String movie, String music){
         API api = API.getApi(apiType);
 
+        if( !StringUtils.isEmpty(movie) && !StringUtils.isEmpty(music) ){
+            return false;
+        }
+
         if(movie!=null){
             return api.getType().equals(Constant.MOVIE_TYPE);
         }
@@ -61,6 +55,7 @@ public class LoadInputQueryValidatorImpl implements LoadInputQueryValidator {
         if(music!=null){
             return api.getType().equals(Constant.MUSIC_TYPE);
         }
+
         return false;
     }
 

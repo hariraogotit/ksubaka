@@ -14,9 +14,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Map;
+import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Hari Rao on 07/01/17.
@@ -24,12 +25,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:applicationContext.xml" })
 public class ApiCallServiceImplTest {
-
-    @Autowired
-    private ApplicationContext applicationContext;
-
-    @Autowired
-    private InputQueryMovieHandlerImpl inputQueryMovieHandler;
 
     @Autowired
     private ApiCallServiceImpl apiCallService;
@@ -45,23 +40,13 @@ public class ApiCallServiceImplTest {
     }
 
     @Test
-    public void testParseApiResponse() throws Exception{
-
-        Map<String,String> theMovieDbApiParameters = inputQueryMovieHandler.getApiParameters()
-                                                                           .get(API.THEMOVIEDBAPI.getName());
-        for(Map.Entry<String,String> entry: theMovieDbApiParameters.entrySet()){
-              if("api_key".equals(entry.getKey())){
-                  entry.setValue("INSERT_CORRUPTED_KEY");
-              }
-        }
-        ClientResponse clientResponse = inputQueryMovieHandler.getApiCallService()
-                                                       .callApi(API.THEMOVIEDBAPI.getUrl(),theMovieDbApiParameters);
+    public void testParseApiResponseToThrowException() throws Exception{
+        ClientResponse clientResponse = mock(ClientResponse.class);
+        Response.StatusType  statusType = mock(Response.StatusType.class);
+        when(statusType.getFamily()).thenReturn(Response.Status.Family.SERVER_ERROR);
+        when(clientResponse.getStatusInfo()).thenReturn(statusType);
         thrown.expect(APIException.class);
         thrown.expectMessage("Error calling the api " + clientResponse.getStatus());
-        inputQueryMovieHandler.getApiCallService().parseApiResponse(clientResponse);
-
+        apiCallService.parseApiResponse(clientResponse);
     }
-
-
-
 }
